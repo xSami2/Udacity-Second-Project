@@ -3,6 +3,8 @@ package com.udacity.vehicles.service;
 import com.udacity.vehicles.domain.car.Car;
 import com.udacity.vehicles.domain.car.CarRepository;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 /**
@@ -42,7 +44,8 @@ public class CarService {
          *   If it does not exist, throw a CarNotFoundException
          *   Remove the below code as part of your implementation.
          */
-        Car car = new Car();
+       Car car = repository.findById(id)
+               .orElseThrow( () -> new CarNotFoundException("Unable to find a car with id : "+ id));
 
         /**
          * TODO: Use the Pricing Web client you create in `VehiclesApiApplication`
